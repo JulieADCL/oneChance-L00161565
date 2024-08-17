@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Chance Dice Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <img src="/inspiration/Chance.png" alt="Dice" />
+    </div>
+    <div class="container">
+      <div class="game-container">
+        <div class="game-mode" id="game-mode">
+          <img src="img/game-mode.png" alt="Game Mode" id="game-mode-img"/>
+          <div class="radio-options">
+            
+            <input
+              type="radio"
+              id="mode-computer"
+              name="game-mode"
+              value="computer"
+            />
+            <label for="mode-computer">
+              <img
+                src="img/unchecked.svg"
+                alt="Computer"
+                class="radio-image"
+                data-unchecked="unchecked.svg"
+                data-checked="checked.svg"
+              />
+              <span>VS Computer</span>
+            </label>
+            <input
+              type="radio"
+              id="mode-multiplayer"
+              name="game-mode"
+              value="multiplayer"
+            />
+            <label for="mode-multiplayer">
+              <img
+                src="img/unchecked.svg"
+                alt="Multiplayer"
+                class="radio-image"
+                data-unchecked="unchecked.svg"
+                data-checked="checked.svg"
+              />
+              <span>Multiplayer</span>
+            </label>
+          </div>
+          <div id="player-count-container" >
+            <label for="player-count"
+              >Number of Players: <span id="player-count-value">2</span></label
+            >
+            <input
+              type="range"
+              id="player-count"
+              name="player-count"
+              min="2"
+              max="10"
+              value="2"
+            />
+          </div>
+          <button id="start-game" disabled>
+            <img src="img/btn-start.svg" alt="Start" />
+          </button>
+        </div>
+        <div id="game-grid" class="game-grid">
+          <!-- Players and dice will be dynamically generated here -->
+        </div>
+
+        <div class="controls">
+          <button id="roll-btn">
+            <img src="img/btn-roll.svg" alt="Roll" />
+          </button>
+          <button id="bank-btn">
+            <img src="img/btn-bank.svg" alt="Bank" />
+          </button>
+        </div>
+        <div id="message"></div>
+        <button id="reset-btn">
+          <img src="img/btn-reset.svg" alt="Reset" />
+        </button>
+      </div>
+      <div class="rules-container">
+        <div class="rules">
+          <img src="/inspiration/gameRules.svg" alt="Dice" />
+          <p>
+            One Chance is a simple dice game where players take turns rolling a
+            six-sided die. The goal is to be the first player to reach 100
+            points or more.
+          </p>
+          <ul class="custom-list">
+            <li class="green">Players take turns rolling a six-sided die.</li>
+            <li class="red">
+              Each turn consists of one or more rolls of the die.
+            </li>
+            <li class="green">
+              If a player rolls a 1, their turn ends, and they score no points
+              for that turn. Play passes to the next player.
+            </li>
+            <li class="red">
+              A player may choose to stop rolling at any time. The score is the
+              sum of all the numbers rolled on that turn.
+            </li>
+            <li class="green">
+              The turn score is then added to the total score.
+            </li>
+            <li class="red">
+              The first player who reaches a score of 100 or higher wins.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer>Juliane Costa L00161565</footer>
+    <script src="script.js"></script>
+  </body>
+</html>
