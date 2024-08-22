@@ -14,7 +14,7 @@ document.getElementById('mode-multiplayer').addEventListener('change', handleGam
 document.getElementById('player-count').addEventListener('input', updatePlayerCountDisplay);
 
 /**
- * Handles the game mode change events, including updating images and toggling player count input.
+ * handles the game mode change events, including updating images and toggling player count input
  */
 function handleGameModeChange() {
     updateGameModeImages();
@@ -22,7 +22,8 @@ function handleGameModeChange() {
 }
 
 /**
- * Toggles the visibility of the player count input based on the multiplayer mode selection.
+ * toggles the visibility of the player count input based on the multiplayer mode selection
+ * 
  */
 function togglePlayerCountInput() {
     const isMultiplayer = document.getElementById('mode-multiplayer').checked;
@@ -31,7 +32,8 @@ function togglePlayerCountInput() {
 }
 
 /**
- * Updates the images displayed based on the selected game mode.
+ * game mode checkboxes have images that change based on the selection
+ * this function updates the images based on the user selection
  */
 function updateGameModeImages() {
     const isComputerMode = document.getElementById('mode-computer').checked;
@@ -46,7 +48,8 @@ function updateGameModeImages() {
 }
 
 /**
- * Updates the display of the player count and validates the start button.
+ * updates number of players depending on the value chosen by the user
+ * the user can choose up to 10 players by changing the position of the slider
  */
 function updatePlayerCountDisplay() {
     const playerCount = parseInt(document.getElementById('player-count').value);
@@ -55,7 +58,7 @@ function updatePlayerCountDisplay() {
 }
 
 /**
- * Enables or disables the start button based on the game mode and player count.
+ * enables the start button based on the game mode and player count
  */
 function validateStartButton() {
     const isMultiplayer = document.getElementById('mode-multiplayer').checked;
@@ -66,7 +69,7 @@ function validateStartButton() {
 }
 
 /**
- * Sets up the game based on the selected mode and player count.
+ * sets up the game based on the selected mode and player count
  */
 function setupGame() {
     const isMultiplayer = document.getElementById('mode-multiplayer').checked;
@@ -95,11 +98,13 @@ function setupGame() {
     updateScores();
     document.getElementById('message').innerText = '';
 }
-
+/**
+ * renders the players and dice on the game board
+ */
 function renderPlayersAndDice() {
     const gameGrid = document.getElementById('game-grid');
     gameGrid.innerHTML = '';
-    gameGrid.style.gridTemplateRows = `repeat(${Math.ceil(players.length / 2)}, 1fr)`;
+    gameGrid.style.gridTemplateRows = `repeat(${Math.ceil(players.length / 2)}, 1fr)`; //set the number of rows based on the number of players
     players.forEach((player, index) => {
         const playerDiv = document.createElement('div');
         playerDiv.className = 'player';
@@ -116,10 +121,13 @@ function renderPlayersAndDice() {
     diceContainer.style.gridRow = '1 / span ' + Math.ceil(players.length / 2);
     gameGrid.appendChild(diceContainer);
 }
-
+/***  
+* rolls dice and updates the game state based on the dice value 
+*/
 function rollDice() {
     const diceValue = Math.floor(Math.random() * 6) + 1;
     document.getElementById('dice').src = `img/dice-${diceValue}.png`;
+    //if the dice value is 1, the current turn score is reset to 0, if the value is > 1, the score is added to the current turn score
     if (diceValue === 1) {
         currentTurnScore = 0;
         players[currentPlayerIndex].currentRolls = [];
@@ -132,9 +140,9 @@ function rollDice() {
 }
 
 /**
- * Banks the current turn score and updates the game state.
+ * Banks the current turn score and updates the game state
  * if the total score of the current player reaches or passes the winning score
- * the function declares the winner. else it clears the current rolls
+ * the function declares the winner, else it clears the current rolls
  * resets the current turn score to 0, and switches to the next player
  * and it updates the scores on the game board
  */
@@ -173,7 +181,7 @@ function switchPlayer() {
 }
 
 /**
- * simulates the computer's turn in the game.
+ * simulates the computer's turn in the game
  */
 function computerTurn() {
     const diceValue = Math.floor(Math.random() * 6) + 1;
@@ -188,20 +196,20 @@ function computerTurn() {
         players[currentPlayerIndex].currentRolls.push(diceValue); // add roll to the list
 
         const riskFactor = Math.random(); // random factor to add a small chance for the computer to bank points independent of the current score
-        const safeThreshold = 10 + Math.random() * 15; // calculate a trashold of points for the computer to bank
+        const safeThreshold = 10 + Math.random() * 20; // calculate a trashold of points for the computer to bank
 
         updateScores();
 
         if (currentTurnScore >= safeThreshold || riskFactor < 0.2) {
-            bankPoints(); // Bank points if the threshold is reached or the risk factor is low
+            bankPoints(); // bank points if the threshold is reached or the risk factor is low
         } else {
-            setTimeout(computerTurn, 1000); // Delay for next roll
+            setTimeout(computerTurn, 1000); // delay for next roll to mimic human player
         }
     }
 }
 
 /**
- * updates the scores and display for each player.
+ * updates the scores and display for each player
  */
 function updateScores() {
     players.forEach((player, index) => {
@@ -214,7 +222,7 @@ function updateScores() {
 
 /**
  * update the message element to display what player won,
- * disable the roll and bank buttons, and display the reset button.
+ * disable the roll and bank buttons, and display the reset button
  */
 function declareWinner() {
     document.getElementById('message').innerText = `${players[currentPlayerIndex].name} wins!`;
